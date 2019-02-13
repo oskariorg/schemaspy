@@ -120,6 +120,7 @@ public class DotNode {
         String fqTableName = (table.isRemote() ? table.getContainer() + "." : "") + tableName;
         String colspanHeader = config.showColumnDetails ? "COLSPAN=\"4\" " : "COLSPAN=\"3\" ";
         String tableOrView = table.isView() ? "view" : "table";
+        String tableComments = table.getComments();
 
         buf.append("  \"" + fqTableName + "\" [" + lineSeparator);
         buf.append("   label=<" + lineSeparator);
@@ -129,16 +130,22 @@ public class DotNode {
         buf.append("<TABLE BORDER=\"0\" CELLSPACING=\"0\">");
         buf.append(Html.TR_START);
         buf.append("<TD ALIGN=\"LEFT\"><B>" + escapeHtml(fqTableName) + "</B>" + Html.TD_END);
-        buf.append("<TD ALIGN=\"RIGHT\">[" + tableOrView + "]" + Html.TD_END);
         buf.append(Html.TR_END);
+
+        if (tableComments != null) {
+            buf.append(Html.TR_START + "<TD ALIGN=\"LEFT\">" + escapeHtml(tableComments) + Html.TD_END + Html.TR_END);
+        }
+
         buf.append("</TABLE>");
         buf.append(Html.TD_END);
         buf.append(Html.TR_END + lineSeparator);
 
         buf.append(columnsToString());
+        /*
         if (!table.isView()) {
             buf.append(tableToString());
         }
+        */
 
         buf.append("    </TABLE>>" + lineSeparator);
         if (!table.isRemote() || Config.getInstance().isOneOfMultipleSchemas()) {
