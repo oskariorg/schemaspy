@@ -2,3 +2,5 @@
 
 Changes
 - Graphical representation of tables show table comment
+- Simplified table graphical representation footer
+- Data type byte size removed from graphical representation

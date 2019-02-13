@@ -238,9 +238,7 @@ public class DotNode {
             buf.append(escapeHtml(column.getName()));
             buf.append(".type\" ALIGN=\"LEFT\">");
             buf.append(column.getShortTypeName().toLowerCase());
-            buf.append("[");
-            buf.append(column.getDetailedSize());
-            buf.append("]" + Html.TD_END);
+            buf.append(Html.TD_END);
         }
         buf.append(Html.TR_END + lineSeparator);
         return buf.toString();
